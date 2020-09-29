@@ -16,15 +16,54 @@ namespace Week04
     { 
         RealEstateEntities context = new RealEstateEntities();
         List<Flat> Flats;
+        Excel.Application xlApp;
+        Excel.Workbook xlWB;
+        Excel.Worksheet xlSheet;
         public Form1()
         {
             InitializeComponent();
             LoadData();
+            //CreateExcel();
         }
 
         private void LoadData()
         {
             Flats = context.Flats.ToList();
+        }
+
+        private void CreateExcel()
+        {
+            string[] headers = new string[] {
+            "Kód",
+            "Eladó",
+            "Oldal",
+            "Kerület",
+            "Lift",
+            "Szobák száma",
+            "Alapterület (m2)",
+            "Ár (mFt)",
+            "Négyzetméter ár (Ft/m2)",
+            ""};
+            for (int i = 0; i < headers.Length; i++)
+            {
+                xlSheet.Cells[1, i+1] = headers[i];
+            }
+            object[,] values = new object[Flats.Count, headers.Length];
+
+            int count = 0;
+            foreach (var f in Flats)
+            {
+                values[count, 0] = f.Code;
+                values[count, 1] = f.Vendor;
+                values[count, 2] = f.Side;
+                values[count, 3] = f.District;
+                values[count, 4] = f.Elevator;
+                values[count, 5] = f.NumberOfRooms;
+                values[count, 6] = f.FloorArea;
+                values[count, 7] = f.Price;
+                values[count, 8] = "";
+                count++;
+            }
         }
     }
 }
