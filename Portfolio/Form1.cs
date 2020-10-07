@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,7 @@ namespace Portfolio
                                       select x)
                                         .ToList();
             MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString());
+            
         }
 
         private void CreatePortfolio()
@@ -65,6 +67,26 @@ namespace Portfolio
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.ShowDialog();
+            if (sfd.FileName != "")
+            {
+                using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                {
+                    sw.Write("Időszak" + " " + "Nyereség");
+                    sw.WriteLine();
+                    /*foreach (var item in)
+                    {
+                        sw.Write( + " " + );
+                        sw.WriteLine();
+                    }*/
+                }
+
+            }
         }
     }
 }
