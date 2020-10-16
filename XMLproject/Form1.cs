@@ -16,7 +16,7 @@ namespace XMLproject
 {
     public partial class Form1 : Form
     {
-        BindingList<RateData> Rates;
+        BindingList<RateData> Rates = new BindingList<RateData>();
         public Form1()
         {
             InitializeComponent();
