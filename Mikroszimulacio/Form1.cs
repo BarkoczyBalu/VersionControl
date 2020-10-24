@@ -26,12 +26,16 @@ namespace Mikroszimulacio
             Population = GetPopulation(@"D:\Suli\Tananyag\V. félév\IRF\Gyak\7\nép.csv");
             BirthProbabilities = GetBirthProb(@"D:\Suli\Tananyag\V. félév\IRF\Gyak\7\születés.csv");
             DeathProbabilities = GetDeathProb(@"D:\Suli\Tananyag\V. félév\IRF\Gyak\7\halál.csv");
+            Simulation();
+        }
 
+        private void Simulation()
+        {
             for (int year = 2005; year <= 2024; year++)
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
-                    SimStep(year, Population);
+                    SimStep(year, Population[i]);
                 }
 
                 int nbrOfMales = (from x in Population
@@ -43,11 +47,6 @@ namespace Mikroszimulacio
                 Console.WriteLine(
                     string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
             }
-        }
-
-        private void SimStep(int year, List<Person> population)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Person> GetPopulation(string csvpath)
@@ -134,6 +133,16 @@ namespace Mikroszimulacio
                     Population.Add(újszülött);
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Simulation();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
