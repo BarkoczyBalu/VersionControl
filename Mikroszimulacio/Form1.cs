@@ -137,12 +137,26 @@ namespace Mikroszimulacio
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
             Simulation();
+            DisplayResults();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = ofd.FileName;
+            }
+        }
 
+        private void DisplayResults()
+        {
+            for (int year = 2005; year <= 2024; year++)
+            {
+                //richTextBox1.Text = 
+            }
         }
     }
 }
