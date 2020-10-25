@@ -18,12 +18,15 @@ namespace Mikroszimulacio
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
 
+        List<int> Males = new List<int>();
+        List<int> Females = new List<int>();
+
         Random rng = new Random(335);
         public Form1()
         {
             InitializeComponent();
 
-            Population = GetPopulation(@"D:\Suli\Tananyag\V. félév\IRF\Gyak\7\nép.csv");
+            Population = GetPopulation(@"D:\Suli\Tananyag\V. félév\IRF\Gyak\7\nép-teszt.csv");
             BirthProbabilities = GetBirthProb(@"D:\Suli\Tananyag\V. félév\IRF\Gyak\7\születés.csv");
             DeathProbabilities = GetDeathProb(@"D:\Suli\Tananyag\V. félév\IRF\Gyak\7\halál.csv");
             Simulation();
@@ -44,6 +47,10 @@ namespace Mikroszimulacio
                 int nbrOfFemales = (from x in Population
                                     where x.Gender == Gender.Female && x.IsAlive
                                     select x).Count();
+
+                Males.Add(nbrOfMales);
+                Females.Add(nbrOfFemales);
+                
                 Console.WriteLine(
                     string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
             }
@@ -79,7 +86,7 @@ namespace Mikroszimulacio
                     {
                         Age = int.Parse(line[0]),
                         NumberOfChildren = int.Parse(line[1]),
-                        BProb = int.Parse(line[2])
+                        BProb = double.Parse(line[2])
                     });
                 }
             }
@@ -98,7 +105,7 @@ namespace Mikroszimulacio
                     {
                         Gender = (Gender)Enum.Parse(typeof(Gender), line[0]),
                         Age = int.Parse(line[1]),
-                        DProb = int.Parse(line[2])
+                        DProb = double.Parse(line[2])
                     });
                 }
             }
@@ -155,7 +162,10 @@ namespace Mikroszimulacio
         {
             for (int year = 2005; year <= 2024; year++)
             {
-                //richTextBox1.Text = 
+                for (int i = 0; i < 20; i++)
+                {
+                    richTextBox1.Text = "Szimulációs év: " + year + "Fiúk: " + Males[i] + "Lányok: " + Females[i];
+                }
             }
         }
     }
