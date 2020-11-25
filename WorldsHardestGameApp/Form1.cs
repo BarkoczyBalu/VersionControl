@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WorldsHardestGame;
 
-namespace WorldsHardestGame
+namespace WorldsHardestGameApp
 {
+
     public partial class Form1 : Form
     {
         GameController gc = new GameController();
